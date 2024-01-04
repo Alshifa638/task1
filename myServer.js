@@ -30,8 +30,8 @@ axios
      const endHrTime = process.hrtime.bigint();
     const elapsedTimeInMs = Number(endHrTime - startHrTime) / 1000000.0;
     console.log(startHrTime,endHrTime)
-   
-res.send({data:response.data,status:response.status,TimeTaken:elapsedTimeInMs});
+    console.log("req.params;",req.params)
+res.send({data:response.data,status:response.status,TimeTaken:elapsedTimeInMs,fetchURL:"/"+fetchURL,method:req.method});
 })
 .catch(function(error){
 if(error.response){
@@ -50,7 +50,7 @@ app.post("/myserver/post",function(req,res){
     .then(function (response){
         const endHrTime = process.hrtime.bigint();
         const elapsedTimeInMs = Number(endHrTime - startHrTime) / 1000000.0;
-        res.send({data:response.data,status:response.status,TimeTaken:elapsedTimeInMs});
+        res.send({data:response.data,status:response.status,TimeTaken:elapsedTimeInMs,fetchURL:req.body.fetchURL,method:req.body.method});
     })
     .catch(function (error){
         if(error.response){
